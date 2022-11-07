@@ -45,7 +45,7 @@ function main() {
       "hex",
     ])
     .on("change", function (c) {
-      hVal.innerHTML = "Alpha: " + c.alpha().toFixed(2);
+      // hVal.innerHTML = "Alpha: " + c.alpha().toFixed(2);
 
       converterInput.value = c.css();
       // console.log(converterInput.value);
