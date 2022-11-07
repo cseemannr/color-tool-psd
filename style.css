@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #534d56;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.6px;
+}
+
+h2 {
+  font-family: "Lora", serif;
+  text-transform: uppercase;
+  font-size: 1.75rem;
+}
+
+input {
+  display: block;
+  height: 24px;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 200px;
+  margin-bottom: 12px;
+  border: solid white 2px;
+  color: black;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+span {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #fff;
+}
+
+table {
+  margin: 24px auto;
+  border-radius: 16px;
+  width: 100%;
+  padding: 4px;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0px;
+  border: 2px solid white;
+}
+
+tr,
+td {
+  border: 1px solid transparent;
+  height: 24px;
+  padding: 2px 6px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+label {
+  color: #ccc;
+  font-size: 0.8rem;
+}
+
+.converter-input {
+  width: 100%;
+  margin: 0;
+}
+
+.color-type {
+  font-weight: 700;
+}
+
+.color-code {
+  color: #ccc;
+  cursor: pointer;
+  position: relative;
+}
+
+.color-code:hover {
+  background-color: rgba(29, 29, 29, 0.5);
+  border: 2px solid white;
+  color: white;
+}
+
+.color-code::after {
+  display: block;
+  position: absolute;
+  content: "Click to Copy";
+  top: -28px;
+  right: 0;
+  background-color: white;
+  color: rgba(29, 29, 29);
+  border: none;
+  border-radius: 12px;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.color-code:hover::after {
+  opacity: 1;
+}
+
+.color-code:active::after {
+  content: "Copied";
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
+  max-width: 62.5rem;
+  padding: 2rem;
+  grid-template-areas:
+    "pickerheader convheader"
+    "picker conv";
+}
+
+.sliders-info {
+  position: absolute;
+  text-align: right;
+  bottom: 0;
+  left: -10px;
+  transform: translateX(-100%);
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+.sliders-info p {
+  margin-top: 18px;
+}
+
+.color-picker-header {
+  grid-area: pickerheader;
+}
+.color-picker-container {
+  position: relative;
+  justify-self: center;
+  grid-area: picker;
+}
+.color-converter-header {
+  grid-area: convheader;
+}
+
+.color-converter-container {
+  width: 18.75rem;
+  justify-self: center;
+  grid-area: conv;
+}
+
+.color-converter-box {
+  height: 48px;
+  border-radius: 24px;
+  border: 2px solid white;
+}
+
+@media (max-width: 48.75em) {
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 45em) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-areas:
+      "pickerheader"
+      "picker"
+      "convheader"
+      "conv";
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .color-picker-container {
+    margin-bottom: 2rem;
+  }
+}

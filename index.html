@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="color-picker-header">Color Picker</h2>
+      <div class="color-picker-container">
+        <input id="hexInput" type="text" />
+        <div onclick="convertColor()" id="picker"></div>
+        <div class="sliders-info">
+          <p>Hue</p>
+          <p>Black</p>
+          <p>Saturation</p>
+          <p>Red</p>
+          <p>Green</p>
+          <p>Blue</p>
+          <p>Kelvin</p>
+        </div>
+      </div>
+      <h2 class="color-converter-header">Color Converter</h2>
+      <div class="color-converter-container">
+        <div>
+          <input
+            class="converter-input"
+            id="color01"
+            type="text"
+            value="rgb(255, 255, 255)"
+            oninput="convertColor()"
+            onchange="validateColor()"
+            onkeydown="submitOnEnter(event)"
+          />
+          <label>Name, Rgb, Hex, Hsl, Hwb, Cmyk:</label>
+          <div class="resultStrings">
+            <div id="error01"></div>
+            <table id="resultTable">
+              <tbody>
+                <tr>
+                  <td id="helpname01" class="color-type">Name</td>
+                  <td id="name01" class="color-code">DeepSkyBlue</td>
+                </tr>
+                <tr>
+                  <td id="helprgb01" class="color-type">Rgb</td>
+                  <td id="rgb01" class="color-code">rgb(0, 191, 255)</td>
+                </tr>
+                <tr>
+                  <td id="helphex01" class="color-type">Hex</td>
+                  <td id="hex01" class="color-code">#00bfff</td>
+                </tr>
+                <tr>
+                  <td id="helphsl01" class="color-type">Hsl</td>
+                  <td id="hsl01" class="color-code">hsl(195, 100%, 50%)</td>
+                </tr>
+                <tr>
+                  <td id="helphwb01" class="color-type">Hwb</td>
+                  <td id="hwb01" class="color-code">hwb(195, 0%, 0%)</td>
+                </tr>
+                <tr>
+                  <td id="helpcmyk01" class="color-type">Cmyk</td>
+                  <td id="cmyk01" class="color-code">
+                    cmyk(100%, 25%, 0%, 0%)
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td id="helpncol01" class="color-type">Ncol</td>
+                  <td id="ncol01" class="color-code">C25, 0%, 0%</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="color-converter-box" id="result01"></div>
+      </div>
+    </div>
+    <!-- color-picker -->
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src="app.js"></script>
+    <!--color converter-->
+    <script src="colorconv.js"></script>
+    <script>
+      function convertColor() {
+        color = document.getElementById("color01").value;
+        if (color == "") {
+          validateColor();
+          return;
+        }
+        color = color.toLowerCase();
+        //document.getElementsByTagName("h1")[0].style.color = w3color(color).toRgbString();
+        c = w3color(color);
+        if (c.valid) {
+          document.getElementById("resultTable").style.display = "table";
+          document.getElementById("error01").innerHTML = "";
+          document.getElementById("result01").style.backgroundColor =
+            c.toRgbaString();
+          document.getElementById("color01").style.borderColor =
+            c.toRgbaString();
+
+          if (c.toName() == "") {
+            document.getElementById("name01").innerHTML = " no name";
+          } else {
+            document.getElementById("name01").innerHTML = c.toName();
+          }
+          document.getElementById("helpname01").innerHTML = "Name";
+          document.getElementById("hex01").innerHTML = c.toHexString();
+          document.getElementById("helphex01").innerHTML = "Hex";
+          document.getElementById("cmyk01").innerHTML = c.toCmykString();
+          document.getElementById("helpcmyk01").innerHTML = "Cmyk";
+          document.getElementById("helpncol01").innerHTML = "Ncol";
+          if (
+            (color.indexOf("rgba") > -1 ||
+              color.indexOf("hsla") > -1 ||
+              color.indexOf("hwba") > -1 ||
+              color.indexOf("ncola")) > -1 ||
+            (color.indexOf("cmyk") == -1 && color.split(",").length == 4) ||
+            (color.indexOf("cmyk") > -1 && color.split(",").length == 5)
+          ) {
+            document.getElementById("rgb01").innerHTML = c.toRgbaString();
+            document.getElementById("hsl01").innerHTML = c.toHslaString();
+            document.getElementById("hwb01").innerHTML = c.toHwbaString();
+            document.getElementById("ncol01").innerHTML = c.toNcolaString();
+            document.getElementById("helprgb01").innerHTML = "Rgba";
+            document.getElementById("helphsl01").innerHTML = "Hsla";
+            document.getElementById("helphwb01").innerHTML = "Hwba";
+          } else {
+            document.getElementById("rgb01").innerHTML = c.toRgbString();
+            document.getElementById("hsl01").innerHTML = c.toHslString();
+            document.getElementById("hwb01").innerHTML = c.toHwbString();
+            document.getElementById("ncol01").innerHTML = c.toNcolString();
+            document.getElementById("helprgb01").innerHTML = "Rgb";
+            document.getElementById("helphsl01").innerHTML = "Hsl";
+            document.getElementById("helphwb01").innerHTML = "Hwb";
+          }
+        } else {
+          validateColor();
+        }
+      }
+      function validateColor() {
+        var color, c, x, i, l;
+        color = document.getElementById("color01").value;
+        c = w3color(color);
+        if (color == "" || !c.valid) {
+          document.getElementById("result01").style.backgroundColor = "#f1f1f1";
+          document.getElementById("resultTable").style.display = "none";
+          document.getElementById("error01").innerHTML =
+            "Not a legal color value";
+          document.getElementById("hex01").innerHTML = "";
+          document.getElementById("rgb01").innerHTML = "";
+          document.getElementById("hsl01").innerHTML = "";
+          document.getElementById("hwb01").innerHTML = "";
+          document.getElementById("ncol01").innerHTML = "";
+          document.getElementById("helpname01").innerHTML = "";
+          document.getElementById("helphex01").innerHTML = "";
+          document.getElementById("helprgb01").innerHTML = "";
+          document.getElementById("helphsl01").innerHTML = "";
+          document.getElementById("helphwb01").innerHTML = "";
+          document.getElementById("helpncol01").innerHTML = "";
+        } else {
+          document.getElementById("resultTable").style.display = "table";
+          document.getElementById("error01").innerHTML = "";
+
+          convertColor();
+        }
+      }
+      function submitOnEnter(e) {
+        keyboardKey = e.which || e.keyCode;
+        if (keyboardKey == 13) {
+          validateColor();
+        }
+      }
+
+      convertColor();
+    </script>
+  </body>
+</html>
