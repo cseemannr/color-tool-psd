@@ -18,7 +18,7 @@ function main() {
   }
 
   colorjoe
-    .hsl("hslPicker", "#113c38", [
+    .hsl("hslPicker", "#5B9279", [
       // "alpha",
       "currentColor",
       [
@@ -58,3 +58,14 @@ function main() {
   //   cj.show();
   // };
 }
+
+var colorCodes = document.querySelectorAll(".color-code");
+
+colorCodes.forEach((code) => {
+  code.addEventListener("click", function (e) {
+    var codeTarget = e.target;
+    var text = codeTarget.innerText;
+
+    navigator.clipboard.writeText(text);
+  });
+});
