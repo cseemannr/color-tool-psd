@@ -12,22 +12,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="colorjoe/colorjoe.css" />
+    <script src="colorjoe/colorjoe.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h2 class="color-picker-header">Color Picker</h2>
+
       <div class="color-picker-container">
-        <input id="hexInput" type="text" />
-        <div onclick="convertColor()" id="picker"></div>
-        <div class="sliders-info">
-          <p>Hue</p>
-          <p>Black</p>
-          <p>Saturation</p>
-          <p>Red</p>
-          <p>Green</p>
-          <p>Blue</p>
-          <p>Kelvin</p>
-        </div>
+        <div class="colorjoe"></div>
       </div>
       <h2 class="color-converter-header">Color Converter</h2>
       <div class="color-converter-container">
@@ -83,12 +76,13 @@
         <div class="color-converter-box" id="result01"></div>
       </div>
     </div>
-    <!-- color-picker -->
-    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    <script src="app.js"></script>
-    <!--color converter-->
+
     <script src="colorconv.js"></script>
     <script>
+      //COLOR PICKER
+      const cj = colorjoe.rgb(document.querySelector(".colorjoe"));
+      cj.show();
+      // COLOR CONVERTOR
       function convertColor() {
         color = document.getElementById("color01").value;
         if (color == "") {
