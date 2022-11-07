@@ -1,10 +1,11 @@
 main();
 
-console.log(colorjoe);
+// console.log(colorjoe);
 
 function main() {
   var val = document.getElementById("rgbValue");
   var hVal = document.getElementById("hslaValue");
+  var converterInput = document.getElementById("color01");
 
   colorjoe.registerExtra("text", function (p, joe, o) {
     e(p, o.text ? o.text : "text");
@@ -18,7 +19,7 @@ function main() {
 
   colorjoe
     .hsl("hslPicker", "#113c38", [
-      "alpha",
+      // "alpha",
       "currentColor",
       [
         "fields",
@@ -30,14 +31,14 @@ function main() {
       [
         "fields",
         {
-          space: "HSLA",
+          space: "HSL",
           limit: 100,
         },
       ],
       [
         "fields",
         {
-          space: "CMYKA",
+          space: "CMYK",
           limit: 100,
         },
       ],
@@ -45,12 +46,15 @@ function main() {
     ])
     .on("change", function (c) {
       hVal.innerHTML = "Alpha: " + c.alpha().toFixed(2);
+
+      converterInput.value = c.css();
+      // console.log(converterInput.value);
     })
     .update();
 
-  document.getElementById("showPicker").onclick = function (e) {
-    e.preventDefault();
-
-    cj.show();
-  };
+  // var cj = colorjoe.rgb("closeablePicker", "red", ["close", "currentColor"]);
+  // document.getElementById("showPicker").onclick = function (e) {
+  //   e.preventDefault();
+  //   cj.show();
+  // };
 }

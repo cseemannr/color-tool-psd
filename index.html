@@ -19,7 +19,11 @@
     <div class="container">
       <h2 class="color-picker-header">Color Picker</h2>
 
-      <div id="hslPicker" class="color-picker-container"></div>
+      <div class="color-picker-container">
+        <div id="hslaValue"></div>
+
+        <div id="hslPicker" onclick="convertColor()"></div>
+      </div>
       <h2 class="color-converter-header">Color Converter</h2>
       <div class="color-converter-container">
         <div>
@@ -92,8 +96,8 @@
           document.getElementById("error01").innerHTML = "";
           document.getElementById("result01").style.backgroundColor =
             c.toRgbaString();
-          document.getElementById("color01").style.borderColor =
-            c.toRgbaString();
+          // document.getElementById("color01").style.borderColor =
+          //   c.toRgbaString();
 
           if (c.toName() == "") {
             document.getElementById("name01").innerHTML = " no name";

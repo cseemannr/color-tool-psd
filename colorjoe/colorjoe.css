@@ -85,10 +85,10 @@
   position: absolute;
 
   /* These seem to cause issues in some browsers, careful!
-  border: 1px solid #BBB;
-  -moz-border-radius: .3em;
-  border-radius: .3em;
-  */
+    border: 1px solid #BBB;
+    -moz-border-radius: .3em;
+    border-radius: .3em;
+    */
 }
 .colorPicker .twod .pointer {
   position: relative;
@@ -127,9 +127,9 @@
 .colorPicker .oned .bg {
   border: 1px solid #bbb;
   /*
-  -moz-border-radius: .3em;
-  border-radius: .3em;
-  */
+    -moz-border-radius: .3em;
+    border-radius: .3em;
+    */
 }
 .colorPicker .oned .pointer {
   position: relative;

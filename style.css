@@ -79,6 +79,14 @@ label {
 
 /* color picker */
 
+.colorPicker {
+  margin: 0;
+  background-color: #eee;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 16px;
+}
+
 .color-picker-header {
   grid-area: pickerheader;
 }
