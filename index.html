@@ -11,17 +11,15 @@
       href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="colorjoe/colorjoe.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="colorjoe/colorjoe.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h2 class="color-picker-header">Color Picker</h2>
 
-      <div class="color-picker-container">
-        <div class="colorjoe"></div>
-      </div>
+      <div id="hslPicker" class="color-picker-container"></div>
       <h2 class="color-converter-header">Color Converter</h2>
       <div class="color-converter-container">
         <div>
@@ -34,7 +32,7 @@
             onchange="validateColor()"
             onkeydown="submitOnEnter(event)"
           />
-          <label>Name, Rgb, Hex, Hsl, Hwb, Cmyk:</label>
+          <label>Name, Rgb, Hex, Hsl, Hwb, Cmyk, Ncol:</label>
           <div class="resultStrings">
             <div id="error01"></div>
             <table id="resultTable">
@@ -65,10 +63,10 @@
                     cmyk(100%, 25%, 0%, 0%)
                   </td>
                 </tr>
-                <!-- <tr>
+                <tr>
                   <td id="helpncol01" class="color-type">Ncol</td>
                   <td id="ncol01" class="color-code">C25, 0%, 0%</td>
-                </tr> -->
+                </tr>
               </tbody>
             </table>
           </div>
@@ -76,12 +74,9 @@
         <div class="color-converter-box" id="result01"></div>
       </div>
     </div>
-
+    <script src="app.js"></script>
     <script src="colorconv.js"></script>
     <script>
-      //COLOR PICKER
-      const cj = colorjoe.rgb(document.querySelector(".colorjoe"));
-      cj.show();
       // COLOR CONVERTOR
       function convertColor() {
         color = document.getElementById("color01").value;
